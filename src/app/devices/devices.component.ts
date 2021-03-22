@@ -63,6 +63,7 @@ export class DevicesComponent implements OnInit {
 
   tagChange (event: MatSelectChange): void {
     this.selectedTags.next(event.value)
+    this.selection.clear()
   }
 
   isAllSelected (): boolean {
