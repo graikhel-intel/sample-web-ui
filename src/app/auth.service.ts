@@ -22,22 +22,14 @@ export class AuthService {
     }
   }
 
-  getMPSOptions (): object {
+  getHeaders (): object {
     return {
-      headers: { 'X-MPS-API-Key': environment.mpsAPIKey },
-      withCredentials: true
-    }
-  }
-
-  getRPSOptions (): object {
-    return {
-      headers: { 'X-RPS-API-Key': environment.rpsAPIKey }
-
+      headers: { }
     }
   }
 
   login (username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.url, { username, password }, this.getMPSOptions())
+    return this.http.post<any>(this.url, { username, password }, this.getHeaders())
       .pipe(
         map(() => {
           this.isLoggedIn = true

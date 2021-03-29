@@ -147,7 +147,7 @@ export class DevicesService {
         startIndex: startIndex
       }
     }
-    return this.http.post<AuditLogResponse>(`${environment.mpsServer}/amt`, payload, this.authService.getMPSOptions())
+    return this.http.post<AuditLogResponse>(`${environment.mpsServer}/amt`, payload, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -160,7 +160,7 @@ export class DevicesService {
       method: 'HardwareInformation',
       payload: { guid }
     }
-    return this.http.post<HardwareInformation>(`${environment.mpsServer}/amt`, payload, this.authService.getMPSOptions())
+    return this.http.post<HardwareInformation>(`${environment.mpsServer}/amt`, payload, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -173,7 +173,7 @@ export class DevicesService {
       method: 'GetAMTFeatures',
       payload: { guid }
     }
-    return this.http.post<AmtFeaturesResponse>(`${environment.mpsServer}/amt`, payload, this.authService.getMPSOptions())
+    return this.http.post<AmtFeaturesResponse>(`${environment.mpsServer}/amt`, payload, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -196,7 +196,7 @@ export class DevicesService {
             action
           }
     }
-    return this.http.post<any>(`${environment.mpsServer}/amt`, payload, this.authService.getMPSOptions())
+    return this.http.post<any>(`${environment.mpsServer}/amt`, payload, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -206,7 +206,7 @@ export class DevicesService {
 
   getData (): Observable<Device[]> {
     const payload = { apikey: 'xxxxx', method: 'AllDevices', payload: {} }
-    return this.http.post<Device[]>(`${environment.mpsServer}/admin`, payload, this.authService.getMPSOptions())
+    return this.http.post<Device[]>(`${environment.mpsServer}/admin`, payload, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -215,7 +215,7 @@ export class DevicesService {
   }
 
   getTags (): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.mpsServer}/metadata/tags`, this.authService.getMPSOptions())
+    return this.http.get<string[]>(`${environment.mpsServer}/metadata/tags`, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -228,7 +228,7 @@ export class DevicesService {
     if (tags.length > 0) {
       query += `?tags=${tags.join(',')}`
     }
-    return this.http.get<Device[]>(query, this.authService.getMPSOptions())
+    return this.http.get<Device[]>(query, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -238,7 +238,7 @@ export class DevicesService {
 
   setAmtFeatures (deviceId: string): Observable<AmtFeaturesResponse> {
     const payload = { apikey: 'xxxxx', method: 'SetAMTFeatures', payload: { guid: deviceId, userConsent: 'none', enableKVM: true, enableSOL: true, enableIDER: true } }
-    return this.http.post<AmtFeaturesResponse>(`${environment.mpsServer}/amt`, payload, this.authService.getMPSOptions())
+    return this.http.post<AmtFeaturesResponse>(`${environment.mpsServer}/amt`, payload, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -248,7 +248,7 @@ export class DevicesService {
 
   getPowerState (deviceId: string): Observable<PowerState> {
     const payload = { apikey: 'xxxxx', method: 'PowerState', payload: { guid: deviceId } }
-    return this.http.post<PowerState>(`${environment.mpsServer}/amt`, payload, this.authService.getMPSOptions())
+    return this.http.post<PowerState>(`${environment.mpsServer}/amt`, payload, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
@@ -257,7 +257,7 @@ export class DevicesService {
   }
 
   getStats (): Observable<DeviceStats> {
-    return this.http.get<DeviceStats>(`${environment.mpsServer}/devices/stats`, this.authService.getMPSOptions())
+    return this.http.get<DeviceStats>(`${environment.mpsServer}/devices/stats`, this.authService.getHeaders())
       .pipe(
         catchError((err) => {
           throw err
